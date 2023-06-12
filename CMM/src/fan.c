@@ -41,6 +41,8 @@ static void extint_detection_callback_int_0(void);
 static void extint_detection_callback_int_1(void);
 static void extint_detection_callback_int_4(void);
 static void extint_detection_callback_int_5(void);
+static void extint_detection_callback_int_2(void);
+static void extint_detection_callback_int_3(void);
 static void get_fan_speed(void);
 static void check_fan_fail(void);
 static void fan_sync_to_smbus(void);
@@ -231,6 +233,10 @@ static void delete_extint_callbacks(void)
 	extint_unregister_callback(extint_detection_callback_int_1 ,1,EXTINT_CALLBACK_TYPE_DETECT);
 	extint_unregister_callback(extint_detection_callback_int_4 ,4,EXTINT_CALLBACK_TYPE_DETECT);
 	extint_unregister_callback(extint_detection_callback_int_5 ,5,EXTINT_CALLBACK_TYPE_DETECT);
+#ifdef SIX_FANs	
+	extint_unregister_callback(extint_detection_callback_int_2 ,2,EXTINT_CALLBACK_TYPE_DETECT);
+	extint_unregister_callback(extint_detection_callback_int_3 ,3,EXTINT_CALLBACK_TYPE_DETECT);
+#endif	
 }
 
 /*
@@ -253,6 +259,16 @@ static void enable_extint_callbacks(void)
 	extint_chan_enable_callback(5 ,EXTINT_CALLBACK_TYPE_DETECT);
 	extint_chan_clear_detected(5);
 	extint_register_callback(extint_detection_callback_int_5, 5 ,EXTINT_CALLBACK_TYPE_DETECT);
+	
+#ifdef SIX_FANs
+	extint_chan_enable_callback(2 ,EXTINT_CALLBACK_TYPE_DETECT);
+	extint_chan_clear_detected(2);
+	extint_register_callback(extint_detection_callback_int_2, 2 ,EXTINT_CALLBACK_TYPE_DETECT);
+	
+	extint_chan_enable_callback(3 ,EXTINT_CALLBACK_TYPE_DETECT);
+	extint_chan_clear_detected(3);
+	extint_register_callback(extint_detection_callback_int_3, 3 ,EXTINT_CALLBACK_TYPE_DETECT);
+#endif
 }
 
 
@@ -288,6 +304,23 @@ static void extint_detection_callback_int_5(void)
 	cnt_tacho[3]++;
 }
 
+#ifdef SIX_FANs
+/*
+ * Interrupt for measure the fan speed (Tacho 4)
+ */
+static void extint_detection_callback_int_2(void)
+{	
+	cnt_tacho[4]++;
+}
+
+/*
+ * Interrupt for measure the fan speed (Tacho 5)
+ */
+static void extint_detection_callback_int_3(void)
+{	
+	cnt_tacho[5]++;
+}
+#endif
 
 /*
  * Measure the speed of the fans
@@ -386,6 +419,10 @@ void learn_fan(void)
 		env_set("max_speed_learned_fan2", (uint32_t)fantacho[1]);
 		env_set("max_speed_learned_fan3", (uint32_t)fantacho[2]);
 		env_set("max_speed_learned_fan4", (uint32_t)fantacho[3]);
+#ifdef SIX_FANs
+		env_set("max_speed_learned_fan5", (uint32_t)fantacho[4]);
+		env_set("max_speed_learned_fan6", (uint32_t)fantacho[5]);
+#endif
 		env_set("learned_fans", (uint32_t)fan_available);
 		
 		tc_set_compare_value(&tc_instance_pwm, TC_COMPARE_CAPTURE_CHANNEL_0, 100-CFG_PWM_INITIAL_VALUE); //set the pwm to 30%		
@@ -457,7 +494,7 @@ void fan_init(void)
 	config_extint_1.gpio_pin_pull      = EXTINT_PULL_UP;
 	config_extint_1.detection_criteria = EXTINT_DETECT_RISING;
 	extint_chan_set_config(1, &config_extint_1);
-	
+
 	struct extint_chan_conf config_extint_4;
 	extint_chan_get_config_defaults(&config_extint_4);
 	config_extint_4.gpio_pin           = CFG_INT4_PIN_FAN3;
@@ -474,6 +511,23 @@ void fan_init(void)
 	config_extint_5.detection_criteria = EXTINT_DETECT_RISING;
 	extint_chan_set_config(5, &config_extint_5);
 	
+#ifdef SIX_FANs
+	struct extint_chan_conf config_extint_2;
+	extint_chan_get_config_defaults(&config_extint_2);
+	config_extint_2.gpio_pin           = CFG_INT2_PIN_FAN5;
+	config_extint_2.gpio_pin_mux       = CFG_INT2_MUX_FAN5;
+	config_extint_2.gpio_pin_pull      = EXTINT_PULL_UP;
+	config_extint_2.detection_criteria = EXTINT_DETECT_RISING;
+	extint_chan_set_config(2, &config_extint_2);
+	
+	struct extint_chan_conf config_extint_3;
+	extint_chan_get_config_defaults(&config_extint_3);
+	config_extint_3.gpio_pin           = CFG_INT3_PIN_FAN6;
+	config_extint_3.gpio_pin_mux       = CFG_INT3_MUX_FAN6;
+	config_extint_3.gpio_pin_pull      = EXTINT_PULL_UP;
+	config_extint_3.detection_criteria = EXTINT_DETECT_RISING;
+	extint_chan_set_config(3, &config_extint_3);
+#endif
 	
 	ioport_set_pin_dir(CFG_FAN_MAX_SPEED, IOPORT_DIR_INPUT);
 }
@@ -491,6 +545,12 @@ static void fan_sync_to_smbus(void)
 	smbus_set_input_reg(SMBUS_REG__FAN_TACHO_3_HIGH_BYTE, (fantacho[2]>>8) & 0xFF);
 	smbus_set_input_reg(SMBUS_REG__FAN_TACHO_4_LOW_BYTE, fantacho[3] & 0xFF);
 	smbus_set_input_reg(SMBUS_REG__FAN_TACHO_4_HIGH_BYTE, (fantacho[3]>>8) & 0xFF);
+#ifdef SIX_FANs
+	smbus_set_input_reg(SMBUS_REG__FAN_TACHO_5_LOW_BYTE, fantacho[4] & 0xFF);
+	smbus_set_input_reg(SMBUS_REG__FAN_TACHO_5_HIGH_BYTE, (fantacho[4]>>8) & 0xFF);
+	smbus_set_input_reg(SMBUS_REG__FAN_TACHO_6_LOW_BYTE, fantacho[5] & 0xFF);
+	smbus_set_input_reg(SMBUS_REG__FAN_TACHO_6_HIGH_BYTE, (fantacho[5]>>8) & 0xFF);
+#endif
 	smbus_set_input_reg(SMBUS_REG__MAX_SPEED, ioport_get_pin_level(CFG_FAN_MAX_SPEED));
 	smbus_set_input_reg(SMBUS_REG__FAN_SPEED, current_pwm);
 }

@@ -288,7 +288,7 @@
       </framework-data>
     </AsfFrameworkConfig>
     <avrtool>com.atmel.avrdbg.tool.atmelice</avrtool>
-    <avrtoolserialnumber>J41800101236</avrtoolserialnumber>
+    <avrtoolserialnumber>J42700052287</avrtoolserialnumber>
     <avrdeviceexpectedsignature>0x10001400</avrdeviceexpectedsignature>
     <avrtoolinterface>SWD</avrtoolinterface>
     <com_atmel_avrdbg_tool_atmelice>
@@ -299,10 +299,21 @@
         <InterfaceName>SWD</InterfaceName>
       </ToolOptions>
       <ToolType>com.atmel.avrdbg.tool.atmelice</ToolType>
-      <ToolNumber>J41800101236</ToolNumber>
+      <ToolNumber>J42700052287</ToolNumber>
       <ToolName>Atmel-ICE</ToolName>
     </com_atmel_avrdbg_tool_atmelice>
     <avrtoolinterfaceclock>2000000</avrtoolinterfaceclock>
+    <com_atmel_avrdbg_tool_samice>
+      <ToolOptions>
+        <InterfaceProperties>
+          <SwdClock>4000000</SwdClock>
+        </InterfaceProperties>
+        <InterfaceName>SWD</InterfaceName>
+      </ToolOptions>
+      <ToolType>com.atmel.avrdbg.tool.samice</ToolType>
+      <ToolNumber>609301569</ToolNumber>
+      <ToolName>J-Link</ToolName>
+    </com_atmel_avrdbg_tool_samice>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -362,7 +373,6 @@
       <Value>../src/ASF/sam0/drivers/sercom/usart</Value>
       <Value>../src/ASF/common/services/ioport</Value>
       <Value>%24(PackRepoDir)\arm\CMSIS\5.4.0\CMSIS\Core\Include\</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.124\samd20\include</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c/i2c_samd20</Value>
       <Value>../src/ASF/sam0/drivers/nvm</Value>
@@ -375,6 +385,7 @@
       <Value>../src/ASF/sam0/drivers/extint/extint_sam_d_r_h</Value>
       <Value>../src/ASF/sam0/drivers/tc</Value>
       <Value>../src/ASF/sam0/drivers/tc/tc_sam_d_r_h</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.165\samd20\include</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
@@ -390,7 +401,7 @@
   </armgcc.linker.libraries.Libraries>
   <armgcc.linker.libraries.LibrarySearchPaths>
     <ListValues>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
+      <Value>..\src\ASF\thirdparty\CMSIS\Lib\GCC</Value>
       <Value>%24(ProjectDir)\Device_Startup</Value>
     </ListValues>
   </armgcc.linker.libraries.LibrarySearchPaths>
@@ -436,7 +447,6 @@
       <Value>../src/ASF/sam0/drivers/sercom/usart</Value>
       <Value>../src/ASF/common/services/ioport</Value>
       <Value>%24(PackRepoDir)\arm\CMSIS\5.4.0\CMSIS\Core\Include\</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.124\samd20\include</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c/i2c_samd20</Value>
       <Value>../src/ASF/sam0/drivers/nvm</Value>
@@ -449,6 +459,7 @@
       <Value>../src/ASF/sam0/drivers/extint/extint_sam_d_r_h</Value>
       <Value>../src/ASF/sam0/drivers/tc</Value>
       <Value>../src/ASF/sam0/drivers/tc/tc_sam_d_r_h</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.165\samd20\include</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.preprocessingassembler.general.AssemblerFlags>-DARM_MATH_CM0PLUS=true -DBOARD=USER_BOARD -DSYSTICK_MODE -DSPI_CALLBACK_MODE=true -DUSART_CALLBACK_MODE=true -DI2C_SLAVE_CALLBACK_MODE=true -DADC_CALLBACK_MODE=true -DEXTINT_CALLBACK_MODE=true -DI2C_MASTER_CALLBACK_MODE=true -DTC_ASYNC=true</armgcc.preprocessingassembler.general.AssemblerFlags>
@@ -486,7 +497,6 @@
       <Value>../src/ASF/sam0/drivers/sercom/usart</Value>
       <Value>../src/ASF/common/services/ioport</Value>
       <Value>%24(PackRepoDir)\arm\CMSIS\5.4.0\CMSIS\Core\Include\</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.124\samd20\include</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c/i2c_samd20</Value>
       <Value>../src/ASF/sam0/drivers/nvm</Value>
@@ -499,6 +509,7 @@
       <Value>../src/ASF/sam0/drivers/extint/extint_sam_d_r_h</Value>
       <Value>../src/ASF/sam0/drivers/tc</Value>
       <Value>../src/ASF/sam0/drivers/tc/tc_sam_d_r_h</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.165\samd20\include</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
 </ArmGcc>
@@ -563,7 +574,6 @@
       <Value>../src/ASF/sam0/drivers/sercom/usart</Value>
       <Value>../src/ASF/common/services/ioport</Value>
       <Value>%24(PackRepoDir)\arm\CMSIS\5.4.0\CMSIS\Core\Include\</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.124\samd20\include</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c/i2c_samd20</Value>
       <Value>../src/ASF/sam0/drivers/nvm</Value>
@@ -576,6 +586,7 @@
       <Value>../src/ASF/sam0/drivers/extint/extint_sam_d_r_h</Value>
       <Value>../src/ASF/sam0/drivers/tc</Value>
       <Value>../src/ASF/sam0/drivers/tc/tc_sam_d_r_h</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.165\samd20\include</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -592,7 +603,7 @@
   </armgcc.linker.libraries.Libraries>
   <armgcc.linker.libraries.LibrarySearchPaths>
     <ListValues>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
+      <Value>..\src\ASF\thirdparty\CMSIS\Lib\GCC</Value>
       <Value>%24(ProjectDir)\Device_Startup</Value>
     </ListValues>
   </armgcc.linker.libraries.LibrarySearchPaths>
@@ -632,7 +643,6 @@
       <Value>../src/ASF/sam0/drivers/sercom/usart</Value>
       <Value>../src/ASF/common/services/ioport</Value>
       <Value>%24(PackRepoDir)\arm\CMSIS\5.4.0\CMSIS\Core\Include\</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.124\samd20\include</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c/i2c_samd20</Value>
       <Value>../src/ASF/sam0/drivers/nvm</Value>
@@ -645,6 +655,7 @@
       <Value>../src/ASF/sam0/drivers/extint/extint_sam_d_r_h</Value>
       <Value>../src/ASF/sam0/drivers/tc</Value>
       <Value>../src/ASF/sam0/drivers/tc/tc_sam_d_r_h</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.165\samd20\include</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.assembler.debugging.DebugLevel>Default (-g)</armgcc.assembler.debugging.DebugLevel>
@@ -683,7 +694,6 @@
       <Value>../src/ASF/sam0/drivers/sercom/usart</Value>
       <Value>../src/ASF/common/services/ioport</Value>
       <Value>%24(PackRepoDir)\arm\CMSIS\5.4.0\CMSIS\Core\Include\</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.124\samd20\include</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c/i2c_samd20</Value>
       <Value>../src/ASF/sam0/drivers/nvm</Value>
@@ -696,6 +706,7 @@
       <Value>../src/ASF/sam0/drivers/extint/extint_sam_d_r_h</Value>
       <Value>../src/ASF/sam0/drivers/tc</Value>
       <Value>../src/ASF/sam0/drivers/tc/tc_sam_d_r_h</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.165\samd20\include</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
   <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
@@ -760,7 +771,6 @@
       <Value>../src/ASF/sam0/drivers/sercom/usart</Value>
       <Value>../src/ASF/common/services/ioport</Value>
       <Value>%24(PackRepoDir)\arm\CMSIS\5.4.0\CMSIS\Core\Include\</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.124\samd20\include</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c/i2c_samd20</Value>
       <Value>../src/ASF/sam0/drivers/nvm</Value>
@@ -773,6 +783,7 @@
       <Value>../src/ASF/sam0/drivers/extint/extint_sam_d_r_h</Value>
       <Value>../src/ASF/sam0/drivers/tc</Value>
       <Value>../src/ASF/sam0/drivers/tc/tc_sam_d_r_h</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.165\samd20\include</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
@@ -789,7 +800,7 @@
   </armgcc.linker.libraries.Libraries>
   <armgcc.linker.libraries.LibrarySearchPaths>
     <ListValues>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
+      <Value>..\src\ASF\thirdparty\CMSIS\Lib\GCC</Value>
       <Value>%24(ProjectDir)\Device_Startup</Value>
     </ListValues>
   </armgcc.linker.libraries.LibrarySearchPaths>
@@ -830,7 +841,6 @@
       <Value>../src/ASF/sam0/drivers/sercom/usart</Value>
       <Value>../src/ASF/common/services/ioport</Value>
       <Value>%24(PackRepoDir)\arm\CMSIS\5.4.0\CMSIS\Core\Include\</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.124\samd20\include</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c/i2c_samd20</Value>
       <Value>../src/ASF/sam0/drivers/nvm</Value>
@@ -843,6 +853,7 @@
       <Value>../src/ASF/sam0/drivers/extint/extint_sam_d_r_h</Value>
       <Value>../src/ASF/sam0/drivers/tc</Value>
       <Value>../src/ASF/sam0/drivers/tc/tc_sam_d_r_h</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.165\samd20\include</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.preprocessingassembler.general.AssemblerFlags>-DARM_MATH_CM0PLUS=true -DBOARD=USER_BOARD -DSYSTICK_MODE -DSPI_CALLBACK_MODE=true -DUSART_CALLBACK_MODE=true -DI2C_SLAVE_CALLBACK_MODE=true -DADC_CALLBACK_MODE=true -DEXTINT_CALLBACK_MODE=true -DI2C_MASTER_CALLBACK_MODE=true -DTC_ASYNC=true</armgcc.preprocessingassembler.general.AssemblerFlags>
@@ -880,7 +891,6 @@
       <Value>../src/ASF/sam0/drivers/sercom/usart</Value>
       <Value>../src/ASF/common/services/ioport</Value>
       <Value>%24(PackRepoDir)\arm\CMSIS\5.4.0\CMSIS\Core\Include\</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.124\samd20\include</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c</Value>
       <Value>../src/ASF/sam0/drivers/sercom/i2c/i2c_samd20</Value>
       <Value>../src/ASF/sam0/drivers/nvm</Value>
@@ -893,6 +903,7 @@
       <Value>../src/ASF/sam0/drivers/extint/extint_sam_d_r_h</Value>
       <Value>../src/ASF/sam0/drivers/tc</Value>
       <Value>../src/ASF/sam0/drivers/tc/tc_sam_d_r_h</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.165\samd20\include</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
 </ArmGcc>

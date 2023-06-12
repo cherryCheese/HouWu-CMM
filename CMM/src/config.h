@@ -73,7 +73,7 @@
 #define CFG_PWM_FREQUENCY				1250
 #define CFG_PWM1_PIN					PIN_PA10E_TC1_WO0
 #define CFG_PWM1_MUX					MUX_PA10E_TC1_WO0
-#define CFG_MAX_FAN_COUNT				4
+#define CFG_MAX_FAN_COUNT				6
 #define CFG_TACHO_MODULE				TC4
 #define	CFG_INT0_PIN_FAN1				PIN_PB16A_EIC_EXTINT0
 #define	CFG_INT0_MUX_FAN1				MUX_PB16A_EIC_EXTINT0
@@ -83,6 +83,12 @@
 #define	CFG_INT4_MUX_FAN3				MUX_PA20A_EIC_EXTINT4
 #define	CFG_INT5_PIN_FAN4				PIN_PA21A_EIC_EXTINT5
 #define	CFG_INT5_MUX_FAN4				MUX_PA21A_EIC_EXTINT5
+#ifdef SIX_FANs
+#define	CFG_INT2_PIN_FAN5				PIN_PA25A_EIC_EXTINT13
+#define	CFG_INT2_MUX_FAN5				MUX_PA25A_EIC_EXTINT13
+#define	CFG_INT3_PIN_FAN6				PIN_PA24A_EIC_EXTINT12
+#define	CFG_INT3_MUX_FAN6				MUX_PA24A_EIC_EXTINT12
+#endif
 #define CFG_PULSES_PER_ROTATION			2
 #define CFG_PWM_INITIAL_VALUE			0
 #define CFG_PWM_SPIN_UP_VALUE			30  //PWM duty cycle while spin up the fans in %
@@ -122,7 +128,7 @@
  * CFG_UART_CHANNEL(channel, SERCOMx, baud_rate, parity, mux_setting, pinmux_pad0, pinmux_pad1, pinmux_pad2, pinmux_pad3)
  */
 #define CFG_UART_RING_SIZE			1024
-#define CFG_UART_CHANNELS			CFG_UART_CHANNEL(0, SERCOM3, CFG_CONSOLE_BAUD_RATE, USART_PARITY_NONE, USART_RX_3_TX_2_XCK_3, PINMUX_UNUSED, PINMUX_UNUSED, PINMUX_PA24C_SERCOM3_PAD2, PINMUX_PA25C_SERCOM3_PAD3)
+#define CFG_UART_CHANNELS			CFG_UART_CHANNEL(0, SERCOM1, CFG_CONSOLE_BAUD_RATE, USART_PARITY_NONE, USART_RX_3_TX_2_XCK_3, PINMUX_UNUSED, PINMUX_UNUSED, PINMUX_PA18D_SERCOM3_PAD2, PINMUX_PA19D_SERCOM3_PAD3)
 
 #define CFG_CONSOLE_CHANNEL			0
 #define CFG_CONSOLE_BAUD_RATE		115200
@@ -181,6 +187,8 @@
 									CFG_ENV_DESC("max_speed_learned_fan2", 0) \
 									CFG_ENV_DESC("max_speed_learned_fan3", 0) \
 									CFG_ENV_DESC("max_speed_learned_fan4", 0) \
+									CFG_ENV_DESC("max_speed_learned_fan5", 0) \
+									CFG_ENV_DESC("max_speed_learned_fan6", 0) \
 									CFG_ENV_DESC("learned_fans", 0) \
 									CFG_ENV_DESC("temperature_learned_sensor1", 0) \
 									CFG_ENV_DESC("temperature_learned_sensor2", 0) \
