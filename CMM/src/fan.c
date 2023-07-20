@@ -41,8 +41,8 @@ static void extint_detection_callback_int_0(void);
 static void extint_detection_callback_int_1(void);
 static void extint_detection_callback_int_4(void);
 static void extint_detection_callback_int_5(void);
-static void extint_detection_callback_int_2(void);
-static void extint_detection_callback_int_3(void);
+static void extint_detection_callback_int_13(void);
+static void extint_detection_callback_int_12(void);
 static void get_fan_speed(void);
 static void check_fan_fail(void);
 static void fan_sync_to_smbus(void);
@@ -233,10 +233,10 @@ static void delete_extint_callbacks(void)
 	extint_unregister_callback(extint_detection_callback_int_1 ,1,EXTINT_CALLBACK_TYPE_DETECT);
 	extint_unregister_callback(extint_detection_callback_int_4 ,4,EXTINT_CALLBACK_TYPE_DETECT);
 	extint_unregister_callback(extint_detection_callback_int_5 ,5,EXTINT_CALLBACK_TYPE_DETECT);
-#ifdef SIX_FANs	
-	extint_unregister_callback(extint_detection_callback_int_2 ,2,EXTINT_CALLBACK_TYPE_DETECT);
-	extint_unregister_callback(extint_detection_callback_int_3 ,3,EXTINT_CALLBACK_TYPE_DETECT);
-#endif	
+#ifdef SIX_FANs
+	extint_unregister_callback(extint_detection_callback_int_13 ,13,EXTINT_CALLBACK_TYPE_DETECT);
+	extint_unregister_callback(extint_detection_callback_int_12 ,12,EXTINT_CALLBACK_TYPE_DETECT);
+#endif
 }
 
 /*
@@ -261,13 +261,13 @@ static void enable_extint_callbacks(void)
 	extint_register_callback(extint_detection_callback_int_5, 5 ,EXTINT_CALLBACK_TYPE_DETECT);
 	
 #ifdef SIX_FANs
-	extint_chan_enable_callback(2 ,EXTINT_CALLBACK_TYPE_DETECT);
-	extint_chan_clear_detected(2);
-	extint_register_callback(extint_detection_callback_int_2, 2 ,EXTINT_CALLBACK_TYPE_DETECT);
+	extint_chan_enable_callback(13 ,EXTINT_CALLBACK_TYPE_DETECT);
+	extint_chan_clear_detected(13);
+	extint_register_callback(extint_detection_callback_int_13, 13 ,EXTINT_CALLBACK_TYPE_DETECT);
 	
-	extint_chan_enable_callback(3 ,EXTINT_CALLBACK_TYPE_DETECT);
-	extint_chan_clear_detected(3);
-	extint_register_callback(extint_detection_callback_int_3, 3 ,EXTINT_CALLBACK_TYPE_DETECT);
+	extint_chan_enable_callback(12 ,EXTINT_CALLBACK_TYPE_DETECT);
+	extint_chan_clear_detected(12);
+	extint_register_callback(extint_detection_callback_int_12, 12 ,EXTINT_CALLBACK_TYPE_DETECT);
 #endif
 }
 
@@ -308,7 +308,7 @@ static void extint_detection_callback_int_5(void)
 /*
  * Interrupt for measure the fan speed (Tacho 4)
  */
-static void extint_detection_callback_int_2(void)
+static void extint_detection_callback_int_13(void)
 {	
 	cnt_tacho[4]++;
 }
@@ -316,7 +316,7 @@ static void extint_detection_callback_int_2(void)
 /*
  * Interrupt for measure the fan speed (Tacho 5)
  */
-static void extint_detection_callback_int_3(void)
+static void extint_detection_callback_int_12(void)
 {	
 	cnt_tacho[5]++;
 }
@@ -512,21 +512,21 @@ void fan_init(void)
 	extint_chan_set_config(5, &config_extint_5);
 	
 #ifdef SIX_FANs
-	struct extint_chan_conf config_extint_2;
-	extint_chan_get_config_defaults(&config_extint_2);
-	config_extint_2.gpio_pin           = CFG_INT2_PIN_FAN5;
-	config_extint_2.gpio_pin_mux       = CFG_INT2_MUX_FAN5;
-	config_extint_2.gpio_pin_pull      = EXTINT_PULL_UP;
-	config_extint_2.detection_criteria = EXTINT_DETECT_RISING;
-	extint_chan_set_config(2, &config_extint_2);
-	
-	struct extint_chan_conf config_extint_3;
-	extint_chan_get_config_defaults(&config_extint_3);
-	config_extint_3.gpio_pin           = CFG_INT3_PIN_FAN6;
-	config_extint_3.gpio_pin_mux       = CFG_INT3_MUX_FAN6;
-	config_extint_3.gpio_pin_pull      = EXTINT_PULL_UP;
-	config_extint_3.detection_criteria = EXTINT_DETECT_RISING;
-	extint_chan_set_config(3, &config_extint_3);
+	struct extint_chan_conf config_extint_13;
+	extint_chan_get_config_defaults(&config_extint_13);
+	config_extint_13.gpio_pin           = CFG_INT2_PIN_FAN5;
+	config_extint_13.gpio_pin_mux       = CFG_INT2_MUX_FAN5;
+	config_extint_13.gpio_pin_pull      = EXTINT_PULL_UP;
+	config_extint_13.detection_criteria = EXTINT_DETECT_RISING;
+	extint_chan_set_config(13, &config_extint_13);
+
+	struct extint_chan_conf config_extint_12;
+	extint_chan_get_config_defaults(&config_extint_12);
+	config_extint_12.gpio_pin           = CFG_INT3_PIN_FAN6;
+	config_extint_12.gpio_pin_mux       = CFG_INT3_MUX_FAN6;
+	config_extint_12.gpio_pin_pull      = EXTINT_PULL_UP;
+	config_extint_12.detection_criteria = EXTINT_DETECT_RISING;
+	extint_chan_set_config(12, &config_extint_12);
 #endif
 	
 	ioport_set_pin_dir(CFG_FAN_MAX_SPEED, IOPORT_DIR_INPUT);
