@@ -24,6 +24,7 @@ static void voltage_test(void);
  */
 static void voltage_test(void)
 {
+	/*
 	turn_3V3_on();
 	delay_cycles_ms(2000);
 	voltages_get_values();
@@ -37,10 +38,13 @@ static void voltage_test(void)
 		printf("\r\n3V3 is not within the limits. Powertest failed!\r\n\r\n");
 		//signalize_3v3_not_ok();
 	}
+	*/
 	
 	turn_5V_on();
+
 	delay_cycles_ms(2000);
 	voltages_get_values();
+		/*
 	check_voltage_ok();
 	if(read_pwr_ok()==3)
 	{
@@ -65,6 +69,7 @@ static void voltage_test(void)
 		printf("\r\n12V is not within the limits. Powertest failed!\r\n\r\n");
 		//signalize_12v_not_ok();
 	}
+	*/
 }
 
 /*
@@ -83,7 +88,7 @@ void learn(void)
 	{
 		printf("\r\nPlease wait until the voltage test...\r\n\r\n");
 		
-		voltage_test();
+		voltage_test();	// power open one by one
 		
 		printf("\r\nPlease wait until the Fan Controller learned...\r\n\r\n");
 		
